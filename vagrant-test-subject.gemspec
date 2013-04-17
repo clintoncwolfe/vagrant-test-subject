@@ -2,6 +2,9 @@
 Gem::Specification.new do |s|
   s.name        = 'vagrant-test-subject'
   s.version     = '0.0.1'
+  s.add_runtime_dependency 'net-ssh'
+  s.add_runtime_dependency 'rspec-http'
+
   s.date        = '2013-04-17'
   s.summary     = "Wrapper class for a Vagrant VM, providing access to testing predicates"
   s.description = "Wrapper class for a Vagrant VM, providing access to testing predicates, such as port map information, process data, ssh connections, and more."
@@ -13,6 +16,7 @@ Gem::Specification.new do |s|
                    "README.md",
                    "lib/vagrant-test-subject.rb",
                    "lib/vagrant-test-subject/ssh.rb",
+                   "lib/vagrant-test-subject/monkey-patches/rspec-http.rb",
                    "lib/vagrant-test-subject/os/redhat.rb",
                    "lib/vagrant-test-subject/os/omnios.rb",
                   ]

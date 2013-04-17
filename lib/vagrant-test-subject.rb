@@ -13,7 +13,7 @@ require 'rspec/http'
 # Us!
 require 'vagrant-test-subject/monkey-patches/rspec-http'
 
-module VagrantTesting
+module VagrantTestSubject
 
   # Encapsulates an SSH channel into a VM
   class SSH
@@ -63,9 +63,9 @@ module VagrantTesting
 
       # Yecch
       vbox_os_to_class = {
-        'RedHat_64' => VagrantTesting::VM::RedHat,
-        'Red Hat (64 bit)' => VagrantTesting::VM::RedHat,
-        'OpenSolaris_64' => VagrantTesting::VM::OmniOS,
+        'RedHat_64' => VagrantTestSubject::VM::RedHat,
+        'Red Hat (64 bit)' => VagrantTestSubject::VM::RedHat,
+        'OpenSolaris_64' => VagrantTestSubject::VM::OmniOS,
       }
 
       klass = vbox_os_to_class[os_type]
@@ -77,7 +77,7 @@ module VagrantTesting
       @vbox_guid = VM.read_vbox_guid(vm_name)
       @vm_info = `VBoxManage showvminfo #{@vbox_guid} --machinereadable`.split("\n")
       init_port_map()
-      @ssh = VagrantTesting::SSH.new(vm_name)
+      @ssh = VagrantTestSubject::SSH.new(vm_name)
     end
 
 

@@ -12,47 +12,9 @@ require 'rspec/http'
 
 # Us!
 require 'vagrant-test-subject/monkey-patches/rspec-http'
+require 'vagrant-test-subject/ssh'
 
 module VagrantTestSubject
-
-  # Encapsulates an SSH channel into a VM
-  class SSH
-    def initialize(vm_name = 'default')
-      # Grab ssh config
-      config = `vagrant ssh-config`
-      
-      # Write most of it to a file, grabbing the username and host
-      config_file = Tempfile.new("vagrant-ssh-conf")
-
-      host, username = nil, nil
-      config.split(/\n/).each do |line|
-        case line
-        when /^\s+User\s+(\w+)/
-          username = $1
-        when /^\s+HostName\s+(\S+)/
-          host = $1
-        when /^\s*Host\s+#{vm_name}/
-          # Ignore 
-        else
-          config_file << line + "\n"
-        end
-      end
-      config_file.flush
-
-      # make a Net::SSH Session
-      # and delegate everything to it
-      @session = Net::SSH.start(host, username, :config => config_file.path)
-
-      config_file.close
-      
-    end
-
-    def method_missing(*args, &block)
-      method_name = args.shift
-      @session.send method_name, *args, &block
-    end
-
-  end
 
   class VM
     attr_reader :ssh, :vbox_guid, :external_ip
@@ -131,7 +93,7 @@ module VagrantTestSubject
     def listening_on_portmap?(vm_port)
       host_port = map_port(vm_port)
       
-      # This shit don't work - always connects, even to a port that isn't listening.
+      # This doesn't work - always connects, even to a port that isn't listening.
       return false
 
       begin

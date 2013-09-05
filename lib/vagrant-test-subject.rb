@@ -29,6 +29,7 @@ module VagrantTestSubject
       vbox_os_to_class = {
         'RedHat_64' => VagrantTestSubject::VM::RedHat,
         'Red Hat (64 bit)' => VagrantTestSubject::VM::RedHat,
+        'Solaris_64' => VagrantTestSubject::VM::OmniOS,
         'OpenSolaris_64' => VagrantTestSubject::VM::OmniOS,
       }
 

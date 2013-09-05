@@ -1,14 +1,14 @@
 # -*-ruby-*-
 Gem::Specification.new do |s|
   s.name        = 'vagrant-test-subject'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.add_runtime_dependency 'net-ssh'
   s.add_runtime_dependency 'rspec-http'
 
   s.date        = '2013-04-17'
   s.summary     = "Wrapper class for a Vagrant VM, providing access to testing predicates"
   s.description = "Wrapper class for a Vagrant VM, providing access to testing predicates, such as port map information, process data, ssh connections, and more."
-  s.authors     = ["Clinton Wolfe"]
+  s.authors     = ["Clinton Wolfe", "Chris Nehren"]
   s.email       = 'clinton@NOSPAM.omniti.com'
   s.files       = [
 	           "ChangeLog",

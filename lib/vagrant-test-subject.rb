@@ -121,7 +121,11 @@ module VagrantTestSubject
     #================================================#
     protected
     def self.read_vbox_guid(vm_name)
-      (JSON.parse(IO.read(".vagrant")))['active'][vm_name]
+      if File.directory?(".vagrant") then
+        IO.read(".vagrant/machines/#{vm_name}/virtualbox/id")
+      else
+        (JSON.parse(IO.read(".vagrant")))['active'][vm_name]
+      end
     end
     
     def self.read_vbox_os_type(vm_name)
